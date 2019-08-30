@@ -50,9 +50,13 @@ class  App extends React.Component {
       .catch(error => console.log(`${error.code}: ${error.message}`))
     }
     listaDeJugadores(){
-      firebase.firestore().collection('jugadores').doc('id').onSnapshot(onSnapshot => 
-      console.log(onSnapshot)
-      )
+      firebase.firestore().collection('jugadores').onSnapshot(onSnapshot => {
+        onSnapshot.forEach(jugador => {
+          console.log(jugador.data().email);
+          console.log(jugador.data().nombre);
+          console.log(jugador.data().estado);
+        })
+      })
      }
     render(){
       return (
